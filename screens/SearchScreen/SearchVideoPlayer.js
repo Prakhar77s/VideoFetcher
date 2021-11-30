@@ -11,6 +11,7 @@ import {
 import { WebView } from "react-native-webview";
 import { useTheme } from "@react-navigation/native";
 import YoutubePlayer from "react-native-youtube-iframe";
+import { YoutubeApi } from "../../env";
 
 // import * as ScreenOrientation from "expo-screen-orientation";
 
@@ -32,7 +33,7 @@ const SearchVideoPlayer = ({ route }) => {
   const fetchData = () => {
     setLoading(true);
     fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=gurbani&type=video&key=AIzaSyDTP1SHztR3xGGjq9zuqTAeVpfnUfEmYX4`
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=gurbani&type=video&key=${YoutubeApi}`
     )
       .then((res) => res.json())
       .then((data) => {

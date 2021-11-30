@@ -13,6 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import HomeCards from "./HomeCards";
+import { YoutubeApi } from "../../env";
 
 //https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=live%20kirtan%20darbar%20sahib&type=video&key=AIzaSyAt0b7vrBRSuzhDUXpk1iEflIAHzd3Maw4
 
@@ -23,7 +24,7 @@ const HomeScreen = () => {
   const fetchData = () => {
     setLoading(true);
     fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=gurbani&type=video&key=AIzaSyDTP1SHztR3xGGjq9zuqTAeVpfnUfEmYX4`
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=gurbani&type=video&key=${YoutubeApi}`
     )
       .then((res) => res.json())
       .then((data) => {

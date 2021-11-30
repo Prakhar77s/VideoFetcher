@@ -11,6 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import SearchCards from "./SearchCards";
 import { useTheme, useNavigation } from "@react-navigation/native";
+import { YoutubeApi } from "../../env";
 
 //https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=live%20kirtan%20darbar%20sahib&type=video&key=AIzaSyAt0b7vrBRSuzhDUXpk1iEflIAHzd3Maw4
 
@@ -23,7 +24,7 @@ const SearchScreen = () => {
   const fetchData = () => {
     setLoading(true);
     fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=AIzaSyDTP1SHztR3xGGjq9zuqTAeVpfnUfEmYX4`
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${value}&type=video&key=${YoutubeApi}`
     )
       .then((res) => res.json())
       .then((data) => {
