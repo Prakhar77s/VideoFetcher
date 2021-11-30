@@ -10,7 +10,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "@react-navigation/native";
 
-const Cards = (props) => {
+const HomeCards = (props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   return (
@@ -57,4 +57,4 @@ const Cards = (props) => {
   );
 };
 
-export default Cards;
+export default HomeCards;

@@ -16,7 +16,7 @@ const SearchCards = (props) => {
   return (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate("VideoPlayer", {
+        navigation.navigate("SearchVideoPlayer", {
           videoId: props.videoId,
           title: props.title,
         })

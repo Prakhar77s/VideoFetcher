@@ -1,9 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import HomeScreen from "../../screens/HomeScreen";
+import HomeScreen from "../../screens/HomeScreen/HomeScreen";
 import CustomHeader from "../../components/CustomHeader/CustomHeader";
 import VideoPlayer from "../../screens/VideoPlayer";
-import SearchScreen from "../../screens/SearchScreen";
+import SearchScreen from "../../screens/SearchScreen/SearchScreen";
+import SearchVideoPlayer from "../../screens/SearchScreen/SearchVideoPlayer";
 
 const HomeStack = createStackNavigator();
 
@@ -29,6 +30,10 @@ const HomeStackNav = () => {
         }}
       />
       <HomeStack.Screen name="VideoPlayer" component={VideoPlayer} />
+      <HomeStack.Screen
+        name="SearchVideoPlayer"
+        component={SearchVideoPlayer}
+      />
       <HomeStack.Screen
         name="SearchScreen"
         component={SearchScreen}

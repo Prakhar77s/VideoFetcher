@@ -8,13 +8,13 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
+import { WebView } from "react-native-webview";
 import { useTheme } from "@react-navigation/native";
 import YoutubePlayer from "react-native-youtube-iframe";
-import HomeCards from "./HomeScreen/HomeCards";
 
 // import * as ScreenOrientation from "expo-screen-orientation";
 
-const VideoPlayer = ({ route }) => {
+const SearchVideoPlayer = ({ route }) => {
   const { colors } = useTheme();
   const { videoId, title } = route.params;
   // function setOrientation() {
@@ -27,7 +27,7 @@ const VideoPlayer = ({ route }) => {
   //   }
   // }
 
-  const [CardData, setCard] = useState([]);
+  const [MiniCardData, setMiniCard] = useState([]);
   const [loading, setLoading] = useState(false);
   const fetchData = () => {
     setLoading(true);
@@ -37,7 +37,7 @@ const VideoPlayer = ({ route }) => {
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
-        setCard(data.items);
+        setMiniCard(data.items);
       });
   };
 
@@ -82,40 +82,9 @@ const VideoPlayer = ({ route }) => {
           // onFullScreenChange={setOrientation}
         /> */}
         </View>
-        <View
-          style={{
-            padding: 5,
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
-          <Button title="Load Latest" onPress={() => fetchData()} />
-        </View>
-        {/*  */}
-        {/*  */}
-        {loading ? (
-          <ActivityIndicator
-            style={{ marginTop: 10 }}
-            size="large"
-            color="blue"
-          />
-        ) : null}
-        <FlatList
-          data={CardData}
-          renderItem={({ item }) => {
-            return (
-              <HomeCards
-                videoId={item.id.videoId}
-                title={item.snippet.title}
-                channel={item.snippet.channelTitle}
-              />
-            );
-          }}
-          keyExtractor={(item) => item.id.videoId}
-        />
       </View>
     </View>
   );
 };
 
-export default VideoPlayer;
+export default SearchVideoPlayer;

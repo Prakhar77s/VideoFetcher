@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,25 +12,30 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@react-navigation/native";
 import YoutubePlayer from "react-native-youtube-iframe";
-import Cards from "../components/Cards/Cards";
+import HomeCards from "./HomeCards";
 
 //https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=live%20kirtan%20darbar%20sahib&type=video&key=AIzaSyAt0b7vrBRSuzhDUXpk1iEflIAHzd3Maw4
 
 const HomeScreen = () => {
   const { colors } = useTheme();
-  const [MiniCardData, setMiniCard] = useState([]);
+  const [HomeCardData, setHomeCard] = useState([]);
   const [loading, setLoading] = useState(false);
   const fetchData = () => {
     setLoading(true);
     fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=gurbani&type=video&key=AIzaSyCv8euGchMV3A6_utBPrsL97__g5squ5B4`
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=gurbani&type=video&key=AIzaSyDTP1SHztR3xGGjq9zuqTAeVpfnUfEmYX4`
     )
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
-        setMiniCard(data.items);
+        setHomeCard(data.items);
       });
   };
+
+  useEffect(() => {
+    // runs on every render
+    fetchData();
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -49,7 +54,7 @@ const HomeScreen = () => {
           justifyContent: "space-around",
         }}
       >
-        <Button title="Load Latest" onPress={() => fetchData()} />
+        {/* <Button title="Load Latest" onPress={() => fetchData()} /> */}
       </View>
       {/*  */}
       {/*  */}
@@ -61,10 +66,10 @@ const HomeScreen = () => {
         />
       ) : null}
       <FlatList
-        data={MiniCardData}
+        data={HomeCardData}
         renderItem={({ item }) => {
           return (
-            <Cards
+            <HomeCards
               videoId={item.id.videoId}
               title={item.snippet.title}
               channel={item.snippet.channelTitle}

@@ -3,7 +3,6 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import BottomTabsNav from "../BottomTabsNav/BottomTabsNav";
 import AboutStackNav from "../StackNav/AboutStackNav";
 import CustomDrawer from "../../components/CustomDrawer/CustomDrawer";
-import SearchScreen from "../../screens/SearchScreen";
 
 const Drawer = createDrawerNavigator();
 
