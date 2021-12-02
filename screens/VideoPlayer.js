@@ -13,7 +13,7 @@ import YoutubePlayer from "react-native-youtube-iframe";
 import HomeCards from "./HomeScreen/HomeCards";
 import { YoutubeApi } from "../env";
 
-// import * as ScreenOrientation from "expo-screen-orientation";
+import * as ScreenOrientation from "expo-screen-orientation";
 
 const VideoPlayer = ({ route }) => {
   const { colors } = useTheme();
@@ -58,7 +58,17 @@ const VideoPlayer = ({ route }) => {
           height={300}
           play={false}
           videoId={videoId}
-          // onFullScreenChange={setOrientation}
+          onFullScreenChange={(isFullScreen) => {
+            if (isFullScreen) {
+              ScreenOrientation.lockAsync(
+                ScreenOrientation.OrientationLock.LANDSCAPE
+              );
+            } else {
+              ScreenOrientation.lockAsync(
+                ScreenOrientation.OrientationLock.PORTRAIT
+              );
+            }
+          }}
         />
       </View>
       <Text
