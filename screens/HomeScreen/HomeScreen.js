@@ -1,26 +1,24 @@
-import React, { useState, Component, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
   Text,
   View,
-  ScrollView,
-  TextInput,
   FlatList,
-  ActivityIndicator,
-  Button,
+  TouchableOpacity,
+  Image,
+  Dimensions,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { useTheme } from "@react-navigation/native";
+import { useTheme, useNavigation } from "@react-navigation/native";
 import YoutubePlayer from "react-native-youtube-iframe";
-import HomeCards from "./HomeCards";
 import { YoutubeApi } from "../../env";
-
-//https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=live%20kirtan%20darbar%20sahib&type=video&key=AIzaSyAt0b7vrBRSuzhDUXpk1iEflIAHzd3Maw4
+import * as ScreenOrientation from "expo-screen-orientation";
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
   const { colors } = useTheme();
   const [HomeCardData, setHomeCard] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const fetchData = () => {
     setLoading(true);
     fetch(
@@ -33,48 +31,104 @@ const HomeScreen = () => {
       });
   };
 
+  const [currentVideo, setVideo] = useState("4j4hAcGkb_Q");
+  const [currentTitle, setTitle] = useState(
+    "LIVE | Kirtan Darbar Sahib Amritsar | SGPC | 26 Nov 2021 | Sikhism Tv"
+  );
+
   useEffect(() => {
-    // runs on every render
     fetchData();
   }, []);
 
   return (
     <View style={{ flex: 1 }}>
       <View>
-        {/* <YoutubePlayer
+        <YoutubePlayer
           height={230}
           play={false}
-          videoId={"5ldj95U5sDc"}
-          // onFullScreenChange={setOrientation}
-        /> */}
+          videoId={currentVideo}
+          onFullScreenChange={(isFullScreen) => {
+            if (isFullScreen) {
+              ScreenOrientation.lockAsync(
+                ScreenOrientation.OrientationLock.LANDSCAPE
+              );
+            } else {
+              ScreenOrientation.lockAsync(
+                ScreenOrientation.OrientationLock.PORTRAIT
+              );
+            }
+          }}
+        />
+        <Text
+          style={{
+            fontSize: 20,
+            color: colors.text,
+            width: Dimensions.get("screen").width - 50,
+            margin: 9,
+          }}
+          numberOfLines={2}
+          ellipsizeMode="tail"
+        >
+          {currentTitle}
+        </Text>
       </View>
       <View
         style={{
-          padding: 5,
+          borderBottomWidth: 1,
+          padding: 1,
           flexDirection: "row",
           justifyContent: "space-around",
         }}
-      >
-        {/* <Button title="Load Latest" onPress={() => fetchData()} /> */}
-      </View>
-      {/*  */}
-      {/*  */}
-      {loading ? (
-        <ActivityIndicator
-          style={{ marginTop: 10 }}
-          size="large"
-          color="blue"
-        />
-      ) : null}
+      ></View>
+
       <FlatList
+        onRefresh={() => fetchData()}
+        refreshing={loading}
         data={HomeCardData}
         renderItem={({ item }) => {
           return (
-            <HomeCards
-              videoId={item.id.videoId}
-              title={item.snippet.title}
-              channel={item.snippet.channelTitle}
-            />
+            <>
+              <TouchableOpacity
+                onPress={() => {
+                  setVideo(item.id.videoId);
+                  setTitle(item.snippet.title);
+                }}
+              >
+                <View
+                  style={{ flexDirection: "row", margin: 10, marginBottom: 0 }}
+                >
+                  <Image
+                    source={{
+                      uri: `https://i.ytimg.com/vi/${item.id.videoId}/hqdefault.jpg`,
+                    }}
+                    style={{
+                      width: "45%",
+                      height: 100,
+                    }}
+                  />
+                  <View
+                    style={{
+                      paddingLeft: 7,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 17,
+                        color: colors.text,
+                        width: Dimensions.get("screen").width / 2,
+                      }}
+                      ellipsizeMode="tail"
+                      numberOfLines={3}
+                    >
+                      {item.snippet.title}
+                    </Text>
+                    <Text style={{ fontSize: 12, color: colors.text }}>
+                      {item.snippet.channelTitle}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </>
           );
         }}
         keyExtractor={(item) => item.id.videoId}

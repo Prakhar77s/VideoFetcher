@@ -1,1 +1,1 @@
-export const YoutubeApi = "AIzaSyDTP1SHztR3xGGjq9zuqTAeVpfnUfEmYX4";
+export const YoutubeApi = "AIzaSyBKddsebWt5aYqDPz3VFedpjCqzfOp2uoM";
