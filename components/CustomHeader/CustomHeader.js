@@ -17,15 +17,6 @@ export default function Header({ navigation, title }) {
       <View>
         <Text style={style.headerText}>{title}</Text>
       </View>
-      <AntDesign
-        style={{ right: 5, position: "absolute" }}
-        name="search1"
-        size={24}
-        color="black"
-        onPress={() => {
-          navigation.navigate("SearchScreen");
-        }}
-      />
     </View>
   );
 }

@@ -28,15 +28,6 @@ const HomeStackNav = () => {
           };
         }}
       />
-      <HomeStack.Screen
-        name="SearchVideoPlayer"
-        component={SearchVideoPlayer}
-      />
-      <HomeStack.Screen
-        name="SearchScreen"
-        component={SearchScreen}
-        options={{ headerShown: false }}
-      />
     </HomeStack.Navigator>
   );
 };
