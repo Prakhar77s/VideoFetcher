@@ -11,6 +11,8 @@ import { useTheme, useNavigation } from "@react-navigation/native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { YoutubeApi } from "../../env";
 import * as ScreenOrientation from "expo-screen-orientation";
+import { WebView } from "react-native-webview";
+import customData from "../../data/data.json";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -21,17 +23,12 @@ const HomeScreen = () => {
 
   const fetchData = () => {
     setLoading(true);
-    fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=gurbani&type=video&key=${YoutubeApi}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        setHomeCard(data.items);
-      });
+
+    setHomeCard(customData.items);
+    setLoading(false);
   };
 
-  const [currentVideo, setVideo] = useState("4j4hAcGkb_Q");
+  const [currentVideo, setVideo] = useState("eVTxZTxN2Ms");
   const [currentTitle, setTitle] = useState(
     "LIVE | Kirtan Darbar Sahib Amritsar | SGPC | 26 Nov 2021 | Sikhism Tv"
   );
@@ -43,6 +40,18 @@ const HomeScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <View>
+        {/* <View
+          style={{
+            width: "100%",
+            height: 200,
+          }}
+        >
+          <WebView
+            javaScriptEnabled={true}
+            domStorageEnabled={true}
+            source={{ uri: `https://www.youtube.com/embed/live` }}
+          />
+        </View> */}
         <YoutubePlayer
           height={230}
           play={false}
