@@ -7,7 +7,19 @@ const AboutScreen = () => {
 
   return (
     <View>
-      <Text style={{ color: colors.text }}>About</Text>
+      <View style={{ color: colors.text, marginTop: 30 }}>
+        <Text
+          style={{
+            color: colors.text,
+            fontWeight: "bold",
+            fontSize: 20,
+            textAlign: "center",
+          }}
+        >
+          www.dekho-ji.com is Top-5 website for Punjabi Sikh Festivals & Gurbani
+          (Google Search Rankings SERP)
+        </Text>
+      </View>
     </View>
   );
 };

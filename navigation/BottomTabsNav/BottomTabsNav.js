@@ -13,7 +13,9 @@ const BottomTabsNav = () => {
   return (
     <Tab.Navigator
       initialRouteName="HomeTab"
-      activeColor="#e91e63"
+      activeColor="black"
+      inactiveColor="black"
+      shifting="true"
       barStyle={{ backgroundColor: "#719FB0" }}
     >
       <Tab.Screen
@@ -22,7 +24,7 @@ const BottomTabsNav = () => {
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
-            <Entypo name="home" size={24} color="black" />
+            <Entypo name="home" size={24} color={color} />
           ),
         }}
       />
@@ -32,7 +34,7 @@ const BottomTabsNav = () => {
         options={{
           tabBarLabel: "About",
           tabBarIcon: ({ color }) => (
-            <AntDesign name="infocirlceo" size={24} color="black" />
+            <AntDesign name="infocirlceo" size={24} color={color} />
           ),
         }}
       />
@@ -42,7 +44,7 @@ const BottomTabsNav = () => {
         options={{
           tabBarLabel: "Contact",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="quick-contacts-mail" size={24} color="black" />
+            <MaterialIcons name="quick-contacts-mail" size={24} color={color} />
           ),
         }}
       />
