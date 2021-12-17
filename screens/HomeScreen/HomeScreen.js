@@ -9,9 +9,7 @@ import {
 } from "react-native";
 import { useTheme, useNavigation } from "@react-navigation/native";
 import YoutubePlayer from "react-native-youtube-iframe";
-import { YoutubeApi } from "../../env";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { WebView } from "react-native-webview";
 import customData from "../../data/data.json";
 
 const HomeScreen = () => {

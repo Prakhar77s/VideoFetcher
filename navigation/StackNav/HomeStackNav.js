@@ -2,8 +2,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import HomeScreen from "../../screens/HomeScreen/HomeScreen";
 import CustomHeader from "../../components/CustomHeader/CustomHeader";
-import SearchScreen from "../../screens/SearchScreen/SearchScreen";
-import SearchVideoPlayer from "../../screens/SearchScreen/SearchVideoPlayer";
 
 const HomeStack = createStackNavigator();
 
