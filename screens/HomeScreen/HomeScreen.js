@@ -26,7 +26,7 @@ const HomeScreen = () => {
     setLoading(false);
   };
 
-  const [currentVideo, setVideo] = useState("eVTxZTxN2Ms");
+  const [currentVideo, setVideo] = useState("YiSpFaS3E2I");
   const [currentTitle, setTitle] = useState(
     "LIVE | Kirtan Darbar Sahib Amritsar | SGPC | 26 Nov 2021 | Sikhism Tv"
   );
